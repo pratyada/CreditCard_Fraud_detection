@@ -1,7 +1,62 @@
-this repository comprise of all the ML basics
+Problem statement : 
+The aim of this project is to predict fraudulent credit card transactions using machine learning models. We will try to detect 100% of the fraudulent transactions while minimising the errors which are Non-Fraudulent transactions but incorrectly classified as fraud.
 
-supervisedadn unsupervised leranings
-K means
-decision tree
-Random forest exercises
-and lots of fun......
+Overview of the problem: 
+•	True Positive: The fraud cases that the model predicted as ‘fraud.’ – should be 100 accurate(%)
+•	False Positive: The non-fraud cases that the model predicted as ‘fraud.’ – aim to reduce this error.
+•	True Negative: The non-fraud cases that the model predicted as ‘non-fraud.’ – OK!
+•	False Negative: The fraud cases that the model predicted as ‘non-fraud.’ – should be 0%
+
+Data Set Analysis is in Kaggle and looks like this : 
+
+ 
+This problem has been picked from Kaggle.
+STEP 1 : DATA UNDERSTANDING 
+1.	The data set is highly skewed, consisting of 492 frauds in a total of 284,807 observations. This resulted in only 0.172% fraud cases. This skewed set is justified by the low number of fraudulent transactions.
+2.	The dataset consists of numerical values from the 28 ‘Principal Component Analysis (PCA)’ transformed features, namely V1 to V28. Furthermore, there is no metadata about the original features provided, so pre-analysis or feature study could not be done.
+3.	The ‘Time’ and ‘Amount’ features are not transformed data.
+4.	There is no missing value in the dataset.
+5.	All columns are gaussians as it’s a derivative of PCA algorithm.
+
+STEP 2 : EDA and correcting Class imbalance.
+1.	The ‘Time’ feature does not indicate the actual time of the transaction and is more of a list of the data in chronological order. So we assume that the ‘Time’ feature has little or no significance in classifying a fraud transaction. Therefore, we eliminate this column from further analysis.
+2.	Null value check
+
+STEP 3 : Class imbalance check and dividing into Train and test Spilt
+
+1.	We need to correct the data imbalance practices. Accuracy will be correctly measured once we have non-imbalance data. ~200K ZEROS and 500 Ones. This is a minority class problem.
+We need standard correctness. Accuracy Fails for Imbalanced Classification. When the class distribution is slightly skewed, accuracy can still be a useful metric. When the skew in the class distributions are severe, accuracy can become an unreliable measure of model performance. We need some other standard of correctness while classifying transactions as fraud or non-fraud.
+Methods for taking care of class imbalance 
+Remove Zeros > not preferred
+Randomly uniformly add minority samples > not preferred as it will emphasis only already given 1s.
+SMOTE > preferred, having another class data points in the vector of two class data points of 1s. K-NN for selections of random synthetic samples 
+ADASYN > Adaptive synthesis and intelligently generate point where there is a low-density area. 
+
+How to implement, Random forest classifier > 
+Class_weight = “Balanced” it will automatically give weight. We can check other ML also and class weight application there to check how uniform oversampling works.
+In sklearn RandomOverSampler, its random and not uniform. It will randomly select the datapoints to make the class balance
+Smote().
+ADASYN(). 
+It will automatically generate the Xtrain and Ytrain class imbalance.
+
+
+70%-30% segregation of the data
+K-fold cross validations,
+As the datapoints has ~500 one’s, best method will be to have K = 5 so that we have 100 data points to validate our model. 100 datapoints is minimum.
+
+STEP 4 : Model building, selection and hyperparameter tuning
+
+K-NN :: K is the nearest neighbour check (odd number), classification of the nearest datapoint which is identified. K =1 is overfitting modelling thus we select value of K not too large and not too low usually between 3 & 11
+ADABoost :: first tree, second tree learns from first…. Group of trees which reduce the error.
+XG-Boost :: Xtream Gradient boosting to check the loss function. Keep the loss reduction for each tree. Booting on the GRADIENTS. Adding L2 regularization for “Xtreme”. This entire algorithm is parallelised and it reduces the training time. system efficiency to make one of the go to algo. LASSO & RIDGE
+
+Model selection >> 
+
+
+
+•	Threshold Cutoff Probability: Probability at which the true positive ratio and true negatives ratio are both highest. It can be noted that this probability is minimal, which is reasonable as the probability of frauds is low.
+•	Accuracy: The measure of correct predictions made by the model – that is, the ratio of fraud transactions classified as fraud and non-fraud classified as non-fraud to the total transactions in the test data.
+•	Sensitivity: Sensitivity, or True Positive Rate, or Recall, is the ratio of correctly identified fraud cases to total fraud cases.
+•	Specificity: Specificity, or True Negative Rate, is the ratio of correctly identified non-fraud cases to total non-fraud cases.
+•	Precision: Precision is the ratio of correctly predicted fraud cases to total predicted fraud cases. 
+
