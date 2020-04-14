@@ -7,7 +7,7 @@ Overview of the problem:
 •	True Negative: The non-fraud cases that the model predicted as ‘non-fraud.’ – OK!
 •	False Negative: The fraud cases that the model predicted as ‘non-fraud.’ – should be 0%
 
-Data Set Analysis is in Kaggle and looks like this : 
+Data Set Analysis is in Kaggle and looks like this : - 
 
  
 This problem has been picked from Kaggle.
